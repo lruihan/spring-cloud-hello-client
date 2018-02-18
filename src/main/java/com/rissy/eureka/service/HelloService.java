@@ -12,19 +12,19 @@ public class HelloService {
 
     private Logger logger = LoggerFactory.getLogger(HelloService.class);
 
-    @Autowired
-    RestTemplate restTemplate;
-
-    @HystrixCommand(fallbackMethod = "helloFallback")
-    public String helloService() {
-        long start = System.currentTimeMillis();
-        String result = restTemplate.getForEntity("http://HELLO-SERVICE/hello", String.class).getBody();
-        long end = System.currentTimeMillis();
-        logger.info("Spend time: " + (end - start));
-        return result;
-    }
-
-    public String helloFallback() {
-        return "error";
-    }
+//    @Autowired
+//    RestTemplate restTemplate;
+//
+//    @HystrixCommand(fallbackMethod = "helloFallback")
+//    public String helloService() {
+//        long start = System.currentTimeMillis();
+//        String result = restTemplate.getForEntity("http://HELLO-SERVICE/hello", String.class).getBody();
+//        long end = System.currentTimeMillis();
+//        logger.info("Spend time: " + (end - start));
+//        return result;
+//    }
+//
+//    public String helloFallback() {
+//        return "error";
+//    }
 }

@@ -16,30 +16,24 @@ public class ConsumerController {
     @Autowired
     FeignHelloService feignHelloService;
 
-    @RequestMapping(value = "/ribbon-consumer", method = RequestMethod.GET)
-    public String helloConsumer() {
-        //return restTemplate.getForEntity("http://HELLO-SERVICE/hello", String.class).getBody();
-        return helloService.helloService();
-    }
+//    @RequestMapping(value = "/ribbon-consumer", method = RequestMethod.GET)
+//    public String helloConsumer() {
+//        //return restTemplate.getForEntity("http://HELLO-SERVICE/hello", String.class).getBody();
+//        return helloService.helloService();
+//    }
 
     @RequestMapping(value = "/feign-consumer", method = RequestMethod.GET)
     public String feignHelloConsumer() {
         return feignHelloService.hello();
     }
-
-    @RequestMapping(value = "/feign-consumer1", method = RequestMethod.GET)
-    public String feignHelloConsumer1() {
-        return feignHelloService.hello1("Rissy");
-    }
-
     @RequestMapping(value = "/feign-consumer2", method = RequestMethod.GET)
     public String feignHelloConsumer2() {
-        return feignHelloService.hello2("Rissy", 28).toString();
-    }
-
-    @RequestMapping(value = "/feign-consumer3", method = RequestMethod.POST)
-    public String feignHelloConsumer3() {
-        return feignHelloService.hello3(new User("Rissy", 28)).toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append(feignHelloService.hello()).append("\n");
+        builder.append(feignHelloService.hello("Rissy")).append("\n");
+        builder.append(feignHelloService.hello("Rissy2", 28)).append("\n");
+        builder.append(feignHelloService.hello(new User("Test", 18))).append("\n");
+        return builder.toString();
     }
 
 }
